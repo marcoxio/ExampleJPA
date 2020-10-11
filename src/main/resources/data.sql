@@ -21,6 +21,19 @@ VALUES (1,'P','E',800),
 
 -- TODO: discount_codes
 
+INSERT INTO time_slots (time_slot_id,time_slot_date,start_time,end_time,is_keynote_time_slot)
+VALUES (1,'2020-04-09','9:00','9:45',TRUE),
+       (2,'2020-04-09','10:00','11:00',FALSE),
+       (3,'2020-04-09','11:15','11:45',FALSE),
+       (4,'2020-04-09','12:45','13:45',FALSE),
+       (5,'2020-04-09','14:00','15:00',FALSE),
+       (6,'2020-04-09','15:15','15:45',FALSE),
+       (7,'2020-04-09','16:00','17:00',FALSE),
+       (8,'2020-04-10','9:00','10:00',FALSE),
+       (9,'2020-04-10','10:15','11:15',FALSE),
+       (10,'2020-04-10','11:30','12:00',FALSE),
+       (11,'2020-04-10','13:00','14:00',FALSE),
+       (12,'2020-04-10','14:15','15:00',TRUE);
 
 INSERT INTO sessions (session_id,session_name,session_length,session_description)
 VALUES (1,'Keynote - The Golden Age of Software',45,''),
@@ -95,8 +108,92 @@ VALUES (1,'Keynote - The Golden Age of Software',45,''),
        (90,'Communication Skills for the Technology Professional',30,''),
        (91,'Personal Kanban',30,'');
 
+INSERT INTO session_schedule (schedule_id,time_slot_id,session_id,room)
+VALUES (1,1,1,'Grand Ballroom'),
+       (2,2,2,'Cedar'),
+       (3,4,3,'Cedar'),
+       (4,5,4,'Cedar'),
+       (5,7,5,'Cedar'),
+       (6,8,6,'Cedar'),
+       (7,11,7,'Cedar'),
+       (8,3,8,'Cedar'),
+       (9,6,9,'Cedar'),
+       (10,9,10,'Cedar'),
+       (11,10,11,'Cedar'),
+       (12,2,12,'Cherry'),
+       (13,4,13,'Cherry'),
+       (14,5,14,'Cherry'),
+       (15,7,15,'Cherry'),
+       (16,8,16,'Cherry'),
+       (17,11,17,'Cherry'),
+       (18,3,18,'Cherry'),
+       (19,6,19,'Cherry'),
+       (20,9,20,'Cherry'),
+       (21,10,21,'Cherry'),
+       (22,2,22,'Maple'),
+       (23,4,23,'Maple'),
+       (24,5,24,'Maple'),
+       (25,7,25,'Maple'),
+       (26,8,26,'Maple'),
+       (27,11,27,'Maple'),
+       (28,3,28,'Maple'),
+       (29,6,29,'Maple'),
+       (30,9,30,'Maple'),
+       (31,10,31,'Maple'),
+       (32,2,32,'Aspen'),
+       (33,4,33,'Aspen'),
+       (34,5,34,'Aspen'),
+       (35,7,35,'Aspen'),
+       (36,8,36,'Aspen'),
+       (37,11,37,'Aspen'),
+       (38,3,38,'Aspen'),
+       (39,6,39,'Aspen'),
+       (40,9,40,'Aspen'),
+       (41,10,41,'Aspen'),
+       (42,2,42,'Hickory'),
+       (43,4,43,'Hickory'),
+       (44,5,44,'Hickory'),
+       (45,7,45,'Hickory'),
+       (46,8,46,'Hickory'),
+       (47,11,47,'Hickory'),
+       (48,3,48,'Hickory'),
+       (49,6,49,'Hickory'),
+       (50,9,50,'Hickory'),
+       (51,10,51,'Hickory'),
+       (62,2,62,'Cottonwood'),
+       (63,4,63,'Cottonwood'),
+       (64,5,64,'Cottonwood'),
+       (65,7,65,'Cottonwood'),
+       (66,8,66,'Cottonwood'),
+       (67,11,67,'Cottonwood'),
+       (68,3,68,'Cottonwood'),
+       (69,6,69,'Cottonwood'),
+       (70,9,70,'Cottonwood'),
+       (71,10,71,'Cottonwood'),
+       (82,2,82,'Sycamore'),
+       (83,4,83,'Sycamore'),
+       (84,5,84,'Sycamore'),
+       (85,7,85,'Sycamore'),
+       (86,8,86,'Sycamore'),
+       (87,11,87,'Sycamore'),
+       (88,3,88,'Sycamore'),
+       (89,6,89,'Sycamore'),
+       (90,9,90,'Sycamore'),
+       (91,10,91,'Sycamore');
 
-
+INSERT INTO tags (tag_id,description)
+VALUES (1,'.NET'),
+       (2,'Java'),
+       (3,'Python'),
+       (4,'JavaScript'),
+       (5,'Angular'),
+       (6,'React'),
+       (7,'Vue.js'),
+       (8,'Web'),
+       (9,'Architecture'),
+       (10,'Soft Skills'),
+       (11,'Agile'),
+       (12,'Cloud');
 
 -- TODO: session_tags
 
@@ -215,5 +312,30 @@ VALUES (1,40),
        (90,14),
        (91,35);
 
+INSERT INTO workshops (workshop_id,workshop_name,description,requirements,room,capacity)
+VALUES (1,'More Effective Agile Practices','','','Cedar',50),
+       (2,'Azure DevOps One Day Bootcamp','','','Cherry',50),
+       (3,'Level Up Your Architecure Skills','','','Maple',20),
+       (4,'Building Microservices with Spring','','','Aspen',30),
+       (5,'SQL Server Performance Tuning','','','Hickory',40),
+       (6,'Serverless Architectures Using AWS','','','Cottonwood',30),
+       (7,'Architecting Large Scale React Applications','','','Sycamore',30),
+       (8,'Machine Learning Quick Start','','','Chestnut',40),
+       (9,'Data Analytics with Tableau','','','Poplar',40),
+       (10,'Python for Enterprise Developers','','','Birch',40),
+       (11,'Hands on Vue.js','','','Ash',40),
+       (12,'Building APIs in ASP.NET Core','','','Oak',30);
+
+-- TODO: workshop_speakers
 
 
+select setval('attendees_attendee_id_seq',COALESCE((select max(attendee_id) + 1 from attendees), 1));
+select setval('attendee_tickets_attendee_ticket_id_seq',COALESCE((select max(attendee_ticket_id) + 1 from attendee_tickets), 1));
+select setval('discount_codes_discount_code_id_seq',COALESCE((select max(discount_code_id) + 1 from discount_codes), 1));
+select setval('session_schedule_schedule_id_seq',COALESCE((select max(schedule_id) + 1 from session_schedule), 1));
+select setval('sessions_session_id_seq',COALESCE((select max(session_id) + 1 from sessions), 1));
+select setval('speakers_speaker_id_seq',COALESCE((select max(speaker_id) + 1 from speakers), 1));
+select setval('tags_tag_id_seq',COALESCE((select max(tag_id) + 1 from tags), 1));
+select setval('ticket_prices_ticket_price_id_seq',COALESCE((select max(ticket_price_id) + 1 from ticket_prices), 1));
+select setval('time_slots_time_slot_id_seq',COALESCE((select max(time_slot_id) + 1 from time_slots), 1));
+select setval('workshops_workshop_id_seq',COALESCE((select max(workshop_id) + 1 from workshops), 1));
